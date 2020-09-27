@@ -12,35 +12,69 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="profile-card">
-            <div class="avatar">
-                <a href="#" target="_blank"><img src="./IMG_20200627_132345.jpg" alt="Tran Tien Hung"></a>
-            </div>
-            <div class="name">Tran Tien Hung</div>
-            <div class="bio">
-                <p>Java web and Angular Developer</p>
-                <p>Year of Experience: 2</p>
-                <p>Hobbies: I like reading, running after work</p>
-            </div>
-            <div class="contact">
-                <ul>
-                    <li title="Github">
-                        <a href="https://github.com/hungtt1996" target="_blank"><i class="fa fa-github"></i></a>
-                    </li>
-                    <li title="Facebook">
-                        <a href="https://www.facebook.com/trantienhung1996" target="_blank"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li title="Skype">
-                        <a href="https://join.skype.com/invite/kQmbZN1EE1N0" target="_blank"><i class="fa fa-skype"></i></a>
-                    </li>
-                    <li title="Email">
-                        <a href="mailto:trantienhung.bk@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
-            </div>
+<div class="container">
+    <div class="weather">
+        <h4>Day la thoi tiet!</h4>
+    </div>
+
+
+    <div class="profile-card">
+        <div class="avatar">
+            <a href="#" target="_blank"><img src="./IMG_20200627_132345.jpg" alt="Tran Tien Hung"></a>
+        </div>
+        <div class="name">Tran Tien Hung</div>
+        <div class="bio">
+            <p>Java web and Angular Developer</p>
+            <p>Year of Experience: 2</p>
+            <p>Hobbies: I like reading, running after work</p>
+        </div>
+        <div class="contact">
+            <ul>
+                <li title="Github">
+                    <a href="https://github.com/hungtt1996" target="_blank"><i class="fa fa-github"></i></a>
+                </li>
+                <li title="Facebook">
+                    <a href="https://www.facebook.com/trantienhung1996" target="_blank"><i
+                            class="fa fa-facebook"></i></a>
+                </li>
+                <li title="Skype">
+                    <a href="https://join.skype.com/invite/kQmbZN1EE1N0" target="_blank"><i
+                            class="fa fa-skype"></i></a>
+                </li>
+                <li title="Email">
+                    <a href="mailto:trantienhung.bk@gmail.com" target="_blank"><i class="fa fa-envelope"
+                                                                                  aria-hidden="true"></i></a>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+<script>
+    var latitude = 0;
+    var longitude = 0;
+    $(document).ready(function () {
+        $('.weather').hide();
+        if ("geolocation" in navigator) { //check Geolocation available
+            //things to do
+            navigator.geolocation.getCurrentPosition(position => {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+            });
+            $.get(`api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=869df5f22a4f0cbc96ea935de00dc116&units=metric&lang=vi`, function (data, status) {
+                console.log(data);
+                console.log('>>>>> ::', status);
+            })
+            $('.weather').show();
+        } else {
+            $('.weather').hide();
+        }
+    })
+</script>
 </body>
 
 </html>
