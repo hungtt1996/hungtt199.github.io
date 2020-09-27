@@ -47,6 +47,11 @@
                 </li>
             </ul>
         </div>
+
+        <div style="display: none">
+            <button type="button" id="weatherBtn" name="weatherBtn" onclick="loadWeather()">Click to load weather
+            </button>
+        </div>
     </div>
 </div>
 
@@ -57,6 +62,20 @@
 <script>
     var latitude = 0;
     var longitude = 0;
+
+    function loadWeather() {
+        $.ajax({
+            url: `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=869df5f22a4f0cbc96ea935de00dc116&units=metric&lang=vi`,
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function (res) {
+                console.log('>>> data ::', res);
+            }
+        })
+    }
+
+
     $(document).ready(function () {
         $('.weather').hide();
         if ("geolocation" in navigator) { //check Geolocation available
@@ -65,10 +84,11 @@
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
             });
-            $.get(`api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=869df5f22a4f0cbc96ea935de00dc116&units=metric&lang=vi`, function (data, status) {
-                console.log(data);
-                console.log('>>>>> ::', status);
-            })
+            // $.get(`api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=869df5f22a4f0cbc96ea935de00dc116&units=metric&lang=vi`, function (data, status) {
+            //     console.log(data);
+            //     console.log('>>>>> ::', status);
+            // })
+            $('#weatherBtn').click();
             $('.weather').show();
         } else {
             $('.weather').hide();
