@@ -20,9 +20,9 @@
         </div>
         <div class="name">Trần Tiến Hưng</div>
         <div class="bio">
-            <p>Backend: SpringBoot</p>
-            <p>Frontend: Angular & Reactjs</p>
-            <p>Trong vai thợ gõ: 4 năm</p>
+            <p>Backend: <span style="font-weight: bold;">SpringBoot</span></p>
+            <p>Frontend: <span style="font-weight: bold;">Angular & Reactjs</span></p>
+            <p>Trong vai thợ gõ: <span style="font-weight: bold;" id="yE"></span></p>
             <p>Sở thích: Đọc sách, truyện tiên hiệp, chạy bộ</p>
         </div>
         <div class="contact">
@@ -44,8 +44,10 @@
                 </li>
             </ul>
         </div>
-
     </div>
+    <script>
+        document.getElementById('yE').innerHTML= `${new Date().getFullYear() - 2019} năm`;
+    </script>
 </body>
 
 </html>
